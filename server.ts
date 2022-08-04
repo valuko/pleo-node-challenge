@@ -26,6 +26,14 @@ app.get('/healthcheck', function healthcheckEndpoint(req, res) {
   res.status(200).send('OK');
 });
 
+app.get('/', function indexEndpoint(req, res) {
+  let xRequestId: string = req.header('x-request-id');
+  if (!xRequestId || !xRequestId.length) {
+    xRequestId = uuid();
+  }
+  res.status(404).setHeader('x-request-id', xRequestId).send('Not Found');
+});
+
 app.use(context);
 app.use(security);
 
