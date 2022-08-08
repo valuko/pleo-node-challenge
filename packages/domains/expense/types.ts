@@ -8,15 +8,7 @@ export interface Expense {
     user_id: string
 }
 
-export interface User {
-    id: string
-    first_name: string
-    last_name: string
-    company_name: string
-    ssn: string
-}
-
-export interface FormattedExpense {
+export interface ExpenseDto {
     id: string
     merchant_name: string
     amount_in_cents: number
@@ -25,5 +17,32 @@ export interface FormattedExpense {
     status: string
     date_created: Date
     user_id: string
-    user?: User
+}
+
+export interface ExpensesMetaParams {
+    limit?: number
+    sortBy?: string // TODO: convert to Enum
+    sortDesc?: boolean
+    offset?: number
+}
+
+export interface FilterExpensesParams {
+    merchant_name?: string
+    min_amount?: number
+    max_amount?: number
+    currency?: string
+    status?: string
+    user_id?: string
+    start_date?: Date
+    end_date?: Date
+}
+
+export interface AllExpensesResponse {
+    expenses: Expense[]
+    meta: {
+        count: number
+        total: number
+        limit: number
+        offset: number
+    }
 }
