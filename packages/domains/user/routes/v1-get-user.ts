@@ -25,7 +25,7 @@ router.get('/get-user-details', async (req, res, next) => {
 
 router.get(
   '/get-all-users',
-  query('sort')
+  query('sort_by')
     .optional()
     .isString()
     .trim(),
@@ -68,6 +68,7 @@ router.get(
     }
     if (offset) reqParams.offset = parseInt(offset as string, 10);
     if (sort_by) reqParams.sortBy = sort_by as string;
+    else reqParams.sortBy = 'id';
     if (sort_order) reqParams.sortDesc = sort_order === 'DESC';
 
     const [userError, result] = await to(getAllUsers(reqParams));

@@ -78,7 +78,7 @@ const buildExpensesMetaParams = (rawParams: Record<string, any>): ExpensesMetaPa
 };
 
 router.get('/get-expense-details', async (req, res, next) => {
-  const [expenseError, expense] = await to(getExpenseDetails(req.query?.expenseId));
+  const [expenseError, expense] = await to(getExpenseDetails(req.query?.expense_id));
 
   if (expenseError) {
     return next(new ApiError(expenseError, expenseError.status, `Could not get expense details: ${expenseError}`, expenseError.title, req));
@@ -134,10 +134,10 @@ router.get(
     .isString()
     .isIn(['ASC', 'DESC'])
     .trim(),
-  query('last_user_id')
+  query('offset')
     .optional()
-    .isString()
-    .trim(),
+    .isNumeric()
+    .toInt(),
   query('limit')
     .optional()
     .isNumeric()
