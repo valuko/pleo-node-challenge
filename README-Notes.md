@@ -110,3 +110,4 @@ Doing this will greatly optimize the queries to fetch the data
 5. Improve error handling to safely catch errors and send safe error messages and codes to the client
 6. Implement authentication make sure requests are authenticated before they can be passed
 7. Improved logging and debug/info messages to help with debugging
+8. Endpoints should follow the RESTful convention for naming
